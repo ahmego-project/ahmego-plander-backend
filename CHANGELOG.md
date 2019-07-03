@@ -14,7 +14,9 @@
 COPY failed: stat /var/lib/docker/tmp/docker-builder704843379/build/libs/backend-0.0.1-SNAPSHOT.jar: no such file or directory
 ```
 - 다음 예정 작업
-    1. gradle build한 docker image를 AWS ECR에 Push하는 작업
+    1. gradle build후 생성한 docker image를 AWS ECR에 Push하는 작업
     2. AWS ECR에 Push한 docker image로 AWS ECS를 통해 배포하는 작업
     3. Jenkinsfile을 작성하여 Jenkins를 통한 CI/CD 구축
         - 브랜치 구성 전략 Git Flow 참고 : https://datasift.github.io/gitflow/IntroducingGitFlow.html
+
+---

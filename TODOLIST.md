@@ -10,10 +10,6 @@
 8. 간단한 CRUD 테스트 API 구현
 9. 회원가입(Create) 및 로그인(Select) 기능 API 구현
 10. 회원 Table과 cascade하여 게시판 Table 구조 설계 및 Repository, Entity 작업
-11. 게시판 기능 구현
- - 게시글 업로드(insert)
- - 게시글 조회(select)
- - 게시글 수정(update)
- - 게시글 삭제(delete)
+11. 매출입력 API 구현
 
 > https://xmfpes.github.io/spring/spring-security/
