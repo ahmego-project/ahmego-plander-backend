@@ -1,0 +1,61 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.palantir.docker"
+
+group = 'com.bangshinchul'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor('org.projectlombok:lombok')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-data-rest')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    runtimeOnly('mysql:mysql-connector-java')
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+    compile('com.auth0:java-jwt:3.1.0')
+//    compileOnly('org.projectlombok:lombok')
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    testCompileOnly 'org.projectlombok:lombok:1.18.8'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
+    testImplementation('org.springframework.security:spring-security-test')
+}
+
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+docker {
+    name "${project.group}/${bootJar.baseName}"
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    buildArgs(['DEPENDENCY': "dependency"])
+}
