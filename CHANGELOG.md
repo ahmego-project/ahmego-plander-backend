@@ -1,5 +1,10 @@
 ## CHANGE LOG
 
+
+<b>[ 19.07.15 ]</b> Dockerfile 수정 및 Jenkinsfile 생성. Gradle Tasks 및 Docker Tasks 커맨드 [README.md](./README.md)에 작성.
+- 이슈사항 
+    - 19.07.04에 작업했던 ./gradlew -xTest build docker 명령어로는 Dockerfile 정의내용대로 Docker image를 못만들어서 그냥 커맨드라인으로 생성되게끔 수정
+***
 <b>[ 19.07.04 ]</b> Dockerfile 추가 및 Gradle build 후 Docker image 생성되도록 작업
 - 참고 링크 : <https://spring.io/guides/gs/spring-boot-docker/>
 - 사용법

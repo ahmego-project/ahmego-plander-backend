@@ -8,4 +8,25 @@
 5. 만약 Jwt 토큰이 정확하지 않거나 요청 URL에 대해서 권한이 맞지 않으면 403 forbidden 에러를 리턴합니다.
 
 ---
+
+```
+## Gradle Tasks ##
+# clean
+$ ./gradlew clean
+
+# bulld
+$ ./gradlew -xTest build
+ 
+# run
+$ java jar ./build/libs/backend-0.0.1-SNAPSHOT.jar 
+
+
+## Docker Tasks ##
+# docker build
+$ docker build -t ahmego/backend .
+
+# docker run 
+$ docker run --rm -p 8080:8080 ahmego/backend:latest
+
+```
 [CHANGE LOG](./CHANGELOG.md)
